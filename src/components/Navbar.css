@@ -1,0 +1,85 @@
+/* NAVBAR */
+
+.Nav-container {
+    position: absolute;
+    width: 255px;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    background-color: var(--bg-nav);
+}
+
+.Nav-logo {
+    margin-bottom: 70px;
+    text-align: center;
+}
+
+.Img-logo {
+    width: 200px;
+    margin-top: 20px;
+}
+
+hr {
+    background-color: #555;
+    border: none;
+    height: 1px;
+}
+
+ul {
+    padding: 0px;
+}
+
+li {
+    list-style: none;
+    padding: 15px 0px 15px 50px;
+}
+
+.brand-interface {
+    color: #a4a6b3;
+}
+
+a:hover {
+    text-decoration: none !important;
+}
+
+a:hover>.brand-interface {
+    text-decoration: none;
+    color: #fff;
+}
+
+a:focus {
+    text-decoration: none;
+    color: #fff;
+}
+
+a:focus>.brand-interface {
+    background: #3e4049;
+    border-left: 3px solid #fff;
+    color: #fff;
+}
+
+/* FAS ICONS */
+
+.fas {
+    margin-right: 20px;
+}
+
+.fas:focus {
+    outline: none;
+}
+
+a .fa-pen {
+    color: #000 !important;
+}
+
+a .fa-pen:hover {
+    color: #555 !important;
+}
+
+.fa-trash:hover {
+    color: #ff5733;
+}
+
+.fa-power-off:hover {
+    color: #ff5733;
+}
