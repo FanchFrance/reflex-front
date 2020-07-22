@@ -26,7 +26,7 @@ const Navbar = () => {
               Commerces
             </li>
           </Link>
-          <Link to="/admin/users">
+          <Link to="/customers">
             <li className="brand-interface">
               <span className="fas fa-users" />
               Clients

@@ -1,20 +1,22 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
-import axios from "axios";
-import { Link } from "react-router-dom";
 import { Button, Modal } from "react-bootstrap";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
-const GamesItem = (props) => {
+import "./Customers.css";
+
+const CustomersItem = (props) => {
   const [show, setShow] = useState(false);
-  const { id, title, language, summary } = props;
+  const { id, firstname, lastname, email } = props;
 
   const handleClose = () => {
     setShow(false);
   };
 
-  const deleteGame = () => {
+  const deleteAdmin = () => {
     axios
-      .delete(`http://localhost:3000/api/games/${id}`)
+      .delete(`http://localhost:3000/api/customers/${id}`)
       .then(window.location.reload(false))
       .catch((err) => {
         // eslint-disable-next-line no-alert
@@ -26,16 +28,16 @@ const GamesItem = (props) => {
     <>
       <Modal size="lg" show={show} onHide={() => handleClose()} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Supprimer le jeu {title}</Modal.Title>
+          <Modal.Title>
+            Supprimer l&apos;admin {firstname} {lastname}
+          </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          Êtes-vous sûr de vouloir supprimer ce jeu de la liste ?
-        </Modal.Body>
+        <Modal.Body>Êtes-vous sûr de vouloir supprimer cet admin ?</Modal.Body>
         <Modal.Footer>
           <Button variant="outline-secondary" onClick={() => handleClose()}>
             Annuler
           </Button>
-          <Button variant="outline-danger" onClick={deleteGame}>
+          <Button variant="outline-danger" onClick={deleteAdmin}>
             Supprimer
           </Button>
         </Modal.Footer>
@@ -44,17 +46,17 @@ const GamesItem = (props) => {
         <div className="col-md-1 ActionTitle">
           <p>{id}</p>
         </div>
-        <div className="col-md-3 ActionTitle">
-          <h3>{title}</h3>
-        </div>
-        <div className="col-md-2  ActionInfos">
-          <p>Langue : {language}</p>
+        <div className="col-md-4 ActionTitle">
+          <h3>
+            {firstname} {lastname}
+          </h3>
         </div>
         <div className="col-md-4  ActionInfos">
-          <p>Résumé : {summary}</p>
+          <p>{email}</p>
         </div>
-        <div className="col-md-2 ActionIcons">
-          <Link to={`/admin/update-games/${id}`}>
+
+        <div className="col-md-3 ActionIcons">
+          <Link to={`/admin/update-admin/${id}`}>
             <span className="fas fa-pen" />
           </Link>
           <span
@@ -71,11 +73,11 @@ const GamesItem = (props) => {
   );
 };
 
-GamesItem.propTypes = {
+CustomersItem.propTypes = {
   id: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  language: PropTypes.string.isRequired,
-  summary: PropTypes.string.isRequired,
+  firstname: PropTypes.string.isRequired,
+  lastname: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
 };
 
-export default GamesItem;
+export default CustomersItem;
