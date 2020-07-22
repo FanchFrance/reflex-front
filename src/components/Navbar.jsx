@@ -1,15 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-//import tricky from '../img/tricky-logo.png';
+import branch from "../img/branch.png";
 import "./Navbar.css";
 
 const Navbar = () => {
   return (
     <nav className="Nav-container">
       <div>
-        {/* <div className="Nav-logo">
+        <div className="Nav-logo">
           <Link to="/admin">
-            <img src={tricky} className="Img-logo" alt="Tricky" />
+            <img src={branch} className="Img-logo" alt="Tricky" />
           </Link>
         </div>
         <ul>
@@ -18,18 +18,18 @@ const Navbar = () => {
               <span className="fas fa-users-cog" />
               Admin
             </li>
-          </Link> */}
-        <ul>
+          </Link>
+
           <Link to="/admin/companies">
             <li className="brand-interface">
               <span className="fas fa-building" />
-              Entreprises
+              Commerces
             </li>
           </Link>
           <Link to="/admin/users">
             <li className="brand-interface">
               <span className="fas fa-users" />
-              Utilisateurs
+              Clients
             </li>
           </Link>
         </ul>
