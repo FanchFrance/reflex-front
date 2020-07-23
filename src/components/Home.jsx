@@ -1,17 +1,18 @@
-import React, { useContext, useEffect, useState } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import Header from "./Header";
 import ButtonAction from "./Buttons/ButtonAction";
+import Navbar from "./Navbar";
 import "../App.css";
 
 const Welcome = () => {
-  const [Profile, setProfile] = useState({
+  const [Profile] = useState({
     firstname: "François",
     lastname: "Yhuel",
   });
 
   return (
     <>
+      <Navbar />
       <Header />
       <section className="ContainerBody">
         <h1>

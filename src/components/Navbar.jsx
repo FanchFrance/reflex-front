@@ -8,19 +8,12 @@ const Navbar = () => {
     <nav className="Nav-container">
       <div>
         <div className="Nav-logo">
-          <Link to="/admin">
+          <Link to="/">
             <img src={branch} className="Img-logo" alt="Tricky" />
           </Link>
         </div>
         <ul>
-          <Link to="/admin/admin">
-            <li className="brand-interface">
-              <span className="fas fa-users-cog" />
-              Admin
-            </li>
-          </Link>
-
-          <Link to="/admin/companies">
+          <Link to="/shops">
             <li className="brand-interface">
               <span className="fas fa-building" />
               Commerces

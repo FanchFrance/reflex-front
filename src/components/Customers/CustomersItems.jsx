@@ -4,8 +4,6 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-import "./Customers.css";
-
 const CustomersItem = (props) => {
   const [show, setShow] = useState(false);
   const { id, firstname, lastname, email } = props;
@@ -14,13 +12,13 @@ const CustomersItem = (props) => {
     setShow(false);
   };
 
-  const deleteAdmin = () => {
+  const deleteCustomer = () => {
     axios
       .delete(`http://localhost:3000/api/customers/${id}`)
       .then(window.location.reload(false))
       .catch((err) => {
         // eslint-disable-next-line no-alert
-        alert(`Erreur lors de la suppression de l'artiste : ${err.message}`);
+        alert(`Erreur lors de la suppression du client : ${err.message}`);
       });
   };
 
@@ -37,7 +35,7 @@ const CustomersItem = (props) => {
           <Button variant="outline-secondary" onClick={() => handleClose()}>
             Annuler
           </Button>
-          <Button variant="outline-danger" onClick={deleteAdmin}>
+          <Button variant="outline-danger" onClick={deleteCustomer}>
             Supprimer
           </Button>
         </Modal.Footer>
@@ -56,7 +54,7 @@ const CustomersItem = (props) => {
         </div>
 
         <div className="col-md-3 ActionIcons">
-          <Link to={`/admin/update-admin/${id}`}>
+          <Link to={`/update-customers/${id}`}>
             <span className="fas fa-pen" />
           </Link>
           <span

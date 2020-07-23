@@ -5,11 +5,13 @@ import "../../App.css";
 import SearchInput from "../SearchInput";
 import CustomersList from "./CustomersList";
 import Header from "../Header";
+import Navbar from "../Navbar";
 
 const CustomersContainer = () => {
   return (
     <>
       <Header />
+      <Navbar />
       <section className="ContainerBody">
         <div className="Panel">
           <div className="col-md-4">
@@ -17,8 +19,8 @@ const CustomersContainer = () => {
           </div>
           <div className="ActionPanel col-md-8">
             <SearchInput />
-            <Link to="/admin/add-admin">
-              <ButtonAction name="Ajouter un admin" display="AddUser" />
+            <Link to="/add-customers">
+              <ButtonAction name="Ajouter un utilisateur" display="AddUser" />
             </Link>
           </div>
         </div>

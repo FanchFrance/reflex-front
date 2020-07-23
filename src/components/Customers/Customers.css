@@ -1,0 +1,102 @@
+.ContainerButton {
+    margin-bottom: 50px;
+}
+
+.delete-Button {
+    border: none;
+    background-color: initial;
+}
+
+.Container-Table th {
+    font-weight: 700;
+    color: #9fa2b4;
+    padding: 20px;
+    border-top: none;
+}
+
+.table td {
+    vertical-align: middle;
+    padding: 0;
+}
+
+.ActionIcon span {
+    margin-left: 20px;
+}
+
+.ActionIconHead,
+.ActionIcon {
+    text-align: center;
+}
+
+.Container-List .Name img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.Container-List td {
+    padding: 15px !important;
+}
+
+.ContainerBody img {
+    border-radius: 50%;
+    width: 160px;
+    height: 160px;
+}
+
+.Avatar {
+    display: flex;
+    justify-content: center;
+}
+
+.AvatarName {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
+.ContainerBody .InputLengthBad {
+    border: 1px solid #db2269;
+}
+
+.ContainerBody .LabelBad {
+    color: #db2269;
+}
+
+.errorText {
+    color: #db2269;
+    font-size: 0.8em;
+    display: relative;
+    padding: 5px;
+}
+
+.Danger {
+    color: #db2269;
+}
+
+/* FAS ICONS */
+
+.fas {
+    margin-right: 20px;
+}
+
+.fas:focus {
+    outline: none;
+}
+
+a .fa-pen {
+    color: #000 !important;
+}
+
+a .fa-pen:hover {
+    color: #555 !important;
+}
+
+.fa-trash:hover {
+    color: #ff5733;
+}
+
+.fa-power-off:hover {
+    color: #ff5733;
+}

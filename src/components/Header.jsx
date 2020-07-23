@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../App.css";
-import homer from "../img/homer.jpg";
+import marsha from "../img/marsha_johnson2.jpeg";
 
 const Header = () => {
-  const [Profile, setProfile] = useState({
+  const [Profile] = useState({
     firstname: "François",
     lastname: "Yhuel",
     photo: "",
@@ -22,7 +22,7 @@ const Header = () => {
             {Profile.firstname} {Profile.lastname}
           </div>
           <div className="navbar-brand">
-            <img src={homer} className="Img-admin" alt="Thomas" />
+            <img src={marsha} className="Img-admin" alt="Thomas" />
           </div>
           <button type="button" className="Disconnect" onClick="" tabIndex={0}>
             <span className="fas fa-power-off" />
