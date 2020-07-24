@@ -9,6 +9,7 @@ import AddCustomers from "./components/Customers/AddCustomers";
 import CustomersUpdate from "./components/Customers/CustomersUpdate";
 import ShopsUpdate from "./components/Shops/ShopsUpdate";
 import ShopsAdd from "./components/Shops/ShopsAdd";
+import ShopsDelete from "./components/Shops/ShopsDelete";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/shops" component={ShopsList} />
         <Route path="/add-shops" component={ShopsAdd} />
         <Route path="/update-shops/:id" component={ShopsUpdate} />
+        <Route path="/delete-shops/:id" component={ShopsDelete} />
       </Switch>
     </>
   );

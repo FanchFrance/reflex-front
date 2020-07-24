@@ -6,32 +6,35 @@ import axios from "axios";
 import ButtonAction from "../Buttons/ButtonAction";
 import Header from "../Header";
 
-const ShopsUpdate = ({ match }) => {
+const ShopsDelete = ({ match }) => {
   const [inputs, setInputs] = useState({
-    firstname: "",
-    lastname: "",
+    name: "",
+    adress: "",
+    photo: "",
     email: "",
-    password: "",
+    type: "",
+    description: "",
   });
 
   const [show, handleShow] = useState(false);
   const { id } = match.params;
+  console.log(typeof match.params.id);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/api/customers/${id}`)
-      .then((response) => response.data)
+      .get(`http://localhost:3000/api/shops/${Number(id)}`)
+      .then((response) => response.data[0])
       .then((data) => setInputs(data));
   }, [id]);
 
   const submitForm = (event) => {
     event.preventDefault();
-    const url = `http://localhost:3000/api/customers/${id}`;
+    const url = `http://localhost:3000/api/shops/${Number(id)}`;
     axios
-      .put(url, inputs)
+      .delete(url, inputs)
       .then((res) => res.data)
       .catch((e) => {
-        alert(`Erreur lors de la modification du client : ${e.message}`);
+        alert(`Erreur lors de la modification du commerce : ${e.message}`);
       });
   };
 
@@ -48,12 +51,11 @@ const ShopsUpdate = ({ match }) => {
       <Modal size="lg" show={show} centered>
         <Modal.Header closeButton>
           <Modal.Title>
-            L&apos;utilisateur {inputs.firstname} {inputs.lastname} a bien été
-            modifié !
+            Le commerce {inputs.name} a bien été supprimé !
           </Modal.Title>
         </Modal.Header>
         <Modal.Footer>
-          <Link to="/customers">
+          <Link to="/shops">
             <button type="button" className="ButtonAction Action">
               Ok
             </button>
@@ -63,12 +65,10 @@ const ShopsUpdate = ({ match }) => {
       <section className="ContainerBody">
         <div className="Panel">
           <div className="col-md-8">
-            <h2 className="mb-8">
-              Modifier le client {inputs.firstname} {inputs.lastname}
-            </h2>
+            <h2 className="mb-8">Supprimer le commerce {inputs.name}</h2>
           </div>
           <div className="ActionPanel col-md-4">
-            <Link to="/customers">
+            <Link to="/shops">
               <ButtonAction name="Retour" display="Return" />
             </Link>
           </div>
@@ -76,24 +76,38 @@ const ShopsUpdate = ({ match }) => {
         <Form onSubmit={submitForm}>
           <Row>
             <Col>
-              <Form.Group onChange={onChange}>
-                <Form.Label>
-                  Prénom <span className="Required">*</span>
-                </Form.Label>
-                <Form.Control
-                  name="firstname"
-                  required
-                  value={inputs.firstname}
-                />
-              </Form.Group>
-              <Form.Group onChange={onChange}>
+              <Form.Group>
                 <Form.Label>
                   Nom <span className="Required">*</span>
                 </Form.Label>
                 <Form.Control
-                  name="lastname"
+                  onChange={onChange}
+                  name="name"
                   required
-                  value={inputs.lastname}
+                  value={inputs.name}
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>
+                  Adresse<span className="Required">*</span>
+                </Form.Label>
+                <Form.Control
+                  onChange={onChange}
+                  name="adress"
+                  required
+                  value={inputs.adress}
+                />
+              </Form.Group>
+            </Col>
+            <Col>
+              <div className="Avatar"></div>
+              <Form.Group onChange={onChange}>
+                <Form.Label>Photo de profil</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="photo"
+                  placeholder="http://"
+                  value={inputs.photo}
                 />
               </Form.Group>
             </Col>
@@ -111,13 +125,18 @@ const ShopsUpdate = ({ match }) => {
           </Form.Group>
           <Form.Group onChange={onChange}>
             <Form.Label>
-              Mot de passe <span className="Required">*</span>
+              type <span className="Required">*</span>
+            </Form.Label>
+            <Form.Control name="password" required value={inputs.type} />
+          </Form.Group>
+          <Form.Group onChange={onChange}>
+            <Form.Label>
+              description <span className="Required">*</span>
             </Form.Label>
             <Form.Control
-              type="password"
-              name="password"
+              name="description"
               required
-              value={inputs.password}
+              value={inputs.description}
             />
           </Form.Group>
 
@@ -127,7 +146,7 @@ const ShopsUpdate = ({ match }) => {
             type="submit"
             onClick={() => handleShow(true)}
           >
-            Modifier
+            Supprimer
           </button>
         </Form>
       </section>
@@ -135,7 +154,7 @@ const ShopsUpdate = ({ match }) => {
   );
 };
 
-ShopsUpdate.propTypes = {
+ShopsDelete.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.number,
@@ -143,4 +162,4 @@ ShopsUpdate.propTypes = {
   }).isRequired,
 };
 
-export default ShopsUpdate;
+export default ShopsDelete;

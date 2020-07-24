@@ -18,9 +18,11 @@ function shop({ data }) {
               </Button>
               {""}
             </Link>
-            <Button variant="danger" size="sm">
-              Delete
-            </Button>{" "}
+            <Link to={`delete-shops/${data.id}`}>
+              <Button variant="danger" size="sm">
+                Delete
+              </Button>{" "}
+            </Link>
             <Button variant="success" size="sm">
               Message
             </Button>
