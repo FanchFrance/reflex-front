@@ -3,6 +3,7 @@ import { Button, Modal } from "react-bootstrap";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import "../../App.css";
 
 const CustomersItem = (props) => {
   const [show, setShow] = useState(false);

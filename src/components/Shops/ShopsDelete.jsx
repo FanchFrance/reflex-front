@@ -1,29 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { Modal, Form, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import ButtonAction from "../Buttons/ButtonAction";
 import Header from "../Header";
-import "../../App.css";
 
-const ShopsAdd = () => {
+const ShopsUpdate = ({ match }) => {
   const [inputs, setInputs] = useState({
-    name: "",
-    adress: "",
-    photo: "",
+    firstname: "",
+    lastname: "",
     email: "",
-    type: "",
-    description: "",
+    password: "",
   });
+
   const [show, handleShow] = useState(false);
+  const { id } = match.params;
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/api/customers/${id}`)
+      .then((response) => response.data)
+      .then((data) => setInputs(data));
+  }, [id]);
+
   const submitForm = (event) => {
     event.preventDefault();
-    const url = "http://localhost:3000/api/shops";
+    const url = `http://localhost:3000/api/customers/${id}`;
     axios
-      .post(url, inputs)
+      .put(url, inputs)
       .then((res) => res.data)
       .catch((e) => {
-        alert(`erreur lors de l'ajout du client : ${e.message}`);
+        alert(`Erreur lors de la modification du client : ${e.message}`);
       });
   };
 
@@ -35,16 +43,17 @@ const ShopsAdd = () => {
   };
 
   return (
-    <div>
+    <>
       <Header />
       <Modal size="lg" show={show} centered>
         <Modal.Header closeButton>
           <Modal.Title>
-            Le commerce {inputs.name} a bien été ajouté !
+            L&apos;utilisateur {inputs.firstname} {inputs.lastname} a bien été
+            modifié !
           </Modal.Title>
         </Modal.Header>
         <Modal.Footer>
-          <Link to="/shops">
+          <Link to="/customers">
             <button type="button" className="ButtonAction Action">
               Ok
             </button>
@@ -53,11 +62,13 @@ const ShopsAdd = () => {
       </Modal>
       <section className="ContainerBody">
         <div className="Panel">
-          <div className="col-md-4">
-            <h2 className="mb-5">Enregistrer un commerce</h2>
+          <div className="col-md-8">
+            <h2 className="mb-8">
+              Modifier le client {inputs.firstname} {inputs.lastname}
+            </h2>
           </div>
-          <div className="ActionPanel col-md-8">
-            <Link to="/shops">
+          <div className="ActionPanel col-md-4">
+            <Link to="/customers">
               <ButtonAction name="Retour" display="Return" />
             </Link>
           </div>
@@ -67,21 +78,23 @@ const ShopsAdd = () => {
             <Col>
               <Form.Group onChange={onChange}>
                 <Form.Label>
-                  nom <span className="Required">*</span>
+                  Prénom <span className="Required">*</span>
                 </Form.Label>
-                <Form.Control name="name" required />
+                <Form.Control
+                  name="firstname"
+                  required
+                  value={inputs.firstname}
+                />
               </Form.Group>
               <Form.Group onChange={onChange}>
                 <Form.Label>
-                  adresse<span className="Required">*</span>
+                  Nom <span className="Required">*</span>
                 </Form.Label>
-                <Form.Control name="adress" required />
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group onChange={onChange}>
-                <Form.Label>Photo du commerce</Form.Label>
-                <Form.Control type="text" name="photo" placeholder="http://" />
+                <Form.Control
+                  name="lastname"
+                  required
+                  value={inputs.lastname}
+                />
               </Form.Group>
             </Col>
           </Row>
@@ -89,19 +102,23 @@ const ShopsAdd = () => {
             <Form.Label>
               Email <span className="Required">*</span>
             </Form.Label>
-            <Form.Control type="email" name="email" required />
+            <Form.Control
+              type="email"
+              name="email"
+              required
+              value={inputs.email}
+            />
           </Form.Group>
           <Form.Group onChange={onChange}>
             <Form.Label>
-              type <span className="Required">*</span>
+              Mot de passe <span className="Required">*</span>
             </Form.Label>
-            <Form.Control name="type" />
-          </Form.Group>
-          <Form.Group onChange={onChange}>
-            <Form.Label>
-              description <span className="Required">*</span>
-            </Form.Label>
-            <Form.Control name="description" />
+            <Form.Control
+              type="password"
+              name="password"
+              required
+              value={inputs.password}
+            />
           </Form.Group>
 
           <p className="Required">* Champs requis</p>
@@ -110,11 +127,20 @@ const ShopsAdd = () => {
             type="submit"
             onClick={() => handleShow(true)}
           >
-            Créer
+            Modifier
           </button>
         </Form>
       </section>
-    </div>
+    </>
   );
 };
-export default ShopsAdd;
+
+ShopsUpdate.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.number,
+    }),
+  }).isRequired,
+};
+
+export default ShopsUpdate;

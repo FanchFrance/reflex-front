@@ -4,7 +4,6 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./components/Home";
 import CustomersContainer from "./components/Customers/CustomersContainer";
-
 import ShopsList from "./components/Shops/ShopsList";
 import AddCustomers from "./components/Customers/AddCustomers";
 import CustomersUpdate from "./components/Customers/CustomersUpdate";

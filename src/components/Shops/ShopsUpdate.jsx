@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import ButtonAction from "../Buttons/ButtonAction";
 import Header from "../Header";
-import defaultImg from "../../img/default-profile.jpg";
 
 const ShopsUpdate = ({ match }) => {
   const [inputs, setInputs] = useState({
@@ -19,22 +18,22 @@ const ShopsUpdate = ({ match }) => {
 
   const [show, handleShow] = useState(false);
   const { id } = match.params;
+  console.log(typeof match.params.id);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/api/shops/${id}`)
-      .then((response) => response.data)
+      .get(`http://localhost:3000/api/shops/${Number(id)}`)
+      .then((response) => response.data[0])
       .then((data) => setInputs(data));
   }, [id]);
 
   const submitForm = (event) => {
     event.preventDefault();
-    const url = `http://localhost:3000/api/shops/${id}`;
+    const url = `http://localhost:3000/api/shops/${Number(id)}`;
     axios
       .put(url, inputs)
       .then((res) => res.data)
       .catch((e) => {
-        // eslint-disable-next-line no-alert
         alert(`Erreur lors de la modification du commerce : ${e.message}`);
       });
   };
@@ -66,12 +65,10 @@ const ShopsUpdate = ({ match }) => {
       <section className="ContainerBody">
         <div className="Panel">
           <div className="col-md-8">
-            <h2 className="mb-8">
-              Modifier l&apos;utilisateur {inputs.firstname} {inputs.lastname}
-            </h2>
+            <h2 className="mb-8">Modifier le commerce {inputs.name}</h2>
           </div>
           <div className="ActionPanel col-md-4">
-            <Link to="/customers">
+            <Link to="/shops">
               <ButtonAction name="Retour" display="Return" />
             </Link>
           </div>
@@ -79,27 +76,31 @@ const ShopsUpdate = ({ match }) => {
         <Form onSubmit={submitForm}>
           <Row>
             <Col>
-              <Form.Group onChange={onChange}>
+              <Form.Group>
                 <Form.Label>
                   Nom <span className="Required">*</span>
                 </Form.Label>
-                <Form.Control name=" name" required value={inputs.firstname} />
+                <Form.Control
+                  onChange={onChange}
+                  name="name"
+                  required
+                  value={inputs.name}
+                />
               </Form.Group>
-              <Form.Group onChange={onChange}>
+              <Form.Group>
                 <Form.Label>
                   Adresse<span className="Required">*</span>
                 </Form.Label>
-                <Form.Control name="adress" required value={inputs.lastname} />
+                <Form.Control
+                  onChange={onChange}
+                  name="adress"
+                  required
+                  value={inputs.adress}
+                />
               </Form.Group>
             </Col>
             <Col>
-              <div className="Avatar">
-                {inputs.photo ? (
-                  <img src={inputs.photo} alt="avatar" />
-                ) : (
-                  <img src={defaultImg} alt="avatar" />
-                )}
-              </div>
+              <div className="Avatar"></div>
               <Form.Group onChange={onChange}>
                 <Form.Label>Photo de profil</Form.Label>
                 <Form.Control
