@@ -1,35 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
-//import tricky from '../img/tricky-logo.png';
-import "./Navbar.css";
+import branch from "../img/branch.png";
+import "../App.css";
 
 const Navbar = () => {
   return (
     <nav className="Nav-container">
       <div>
-        {/* <div className="Nav-logo">
-          <Link to="/admin">
-            <img src={tricky} className="Img-logo" alt="Tricky" />
+        <div className="Nav-logo">
+          <Link to="/">
+            <img src={branch} className="Img-logo" alt="Tricky" />
           </Link>
         </div>
         <ul>
-          <Link to="/admin/admin">
-            <li className="brand-interface">
-              <span className="fas fa-users-cog" />
-              Admin
-            </li>
-          </Link> */}
-        <ul>
-          <Link to="/admin/companies">
+          <Link to="/shops">
             <li className="brand-interface">
               <span className="fas fa-building" />
-              Entreprises
+              Commerces
             </li>
           </Link>
-          <Link to="/admin/users">
+          <Link to="/customers">
             <li className="brand-interface">
               <span className="fas fa-users" />
-              Utilisateurs
+              Clients
             </li>
           </Link>
         </ul>
